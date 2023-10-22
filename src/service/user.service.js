@@ -11,6 +11,14 @@ class UserService {
     const [result] = await connection.execute(statement, [name, password]);
     return result;
   }
+
+  async checkNameExists(name) {
+    // 1.拼接statement
+    const statement = "SELECT * FROM `user` WHERE name=?";
+    // 2.执行sql语句
+    const [result] = await connection.execute(statement, [name]);
+    return result.length > 0;
+  }
 }
 
 module.exports = new UserService();
